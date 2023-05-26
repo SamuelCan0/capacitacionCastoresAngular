@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Cliente } from '../components/clientes/cliente';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
+
 
 
 @Injectable({
@@ -20,8 +22,30 @@ export class ClienteService {
 
 
 
-  getClientes(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(this.urlEndpoint);
+  getClientes(page:number): Observable<Cliente[]> {
+    return this.http.get(this.urlEndpoint+'/page/'+page).pipe(
+      tap((response:any)=>{
+        console.log("tap 1");
+        (response.content as Cliente[]).forEach(cliente=>{
+          console.log(cliente.nombre);
+        })
+      })
+      ,
+      map((response:any) => {
+        (response.content as Cliente[]).map(cliente => {
+          cliente.nombre=cliente.nombre.toUpperCase();
+          cliente.createAt=formatDate(cliente.createAt,'EEEE dd, MMMM yyyy','es-MX');
+          return cliente;
+        });
+        return response;
+      }),
+      tap((response:any)=>{
+        console.log('tap 2');
+        (response.content as Cliente[]).forEach(cliente=>{
+          console.log(cliente.nombre);
+        })
+      })
+    );
   }
 
   create(cliente:Cliente):Observable<any> {
