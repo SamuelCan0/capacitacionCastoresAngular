@@ -1,0 +1,31 @@
+<div class="card bg-dark text-white my-3">
+  <div class="card-header">Detalle del Cliente</div>
+  <div class="card-body">
+    <div class="container my-2">
+      <div class="row">
+        <div class="col-sm">
+          <ul *ngIf="cliente" class="list-group text-dark">
+            <li class="list-group-item">{{cliente.nombre}}</li>
+            <li class="list-group-item">{{cliente.apellido}}</li>
+            <li class="list-group-item">{{cliente.email}}</li>
+            <li class="list-group-item">{{cliente.createAt | date:"fullDate"}}</li>
+            <div class="input-group my-2">
+              <div class="mb-3 custom-file">
+                <input (change)="seleccionarFoto($event)" class="form-control form-control-sm" id="formFileSm" type="file"
+                  placeholder="Subir Foto">
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-sm btn-success mx-1" type="button" id="formFileSmAdd" (click)="subirFoto()" [disabled]="!fotoSeleccionada">
+                  SubirFoto
+                </button>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="col-sm">
+          <img *ngIf="cliente?.foto" src="http://localhost:8001/api/uploads/img/{{cliente.foto}}" alt="{{cliente.foto}}" class="img-thumbnail rounded">
+        </div>
+      </div>
+    </div>
+  <div>
+</div>

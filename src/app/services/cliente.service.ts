@@ -95,4 +95,18 @@ export class ClienteService {
         return throwError(e);
       }));
   }
+
+  subirFoto(archivo:File,id:Number):Observable<Cliente> {
+    let formData=new FormData();
+    formData.append("archivo",archivo);
+    formData.append("id",id.toString());
+    return this.http.post(`${this.urlEndpoint}/upload`,formData).pipe(
+      map((response:any)=>response.Cliente as Cliente),
+      catchError((e:any)=>{
+        console.error(e.error.mensaje);
+        Swal.fire(e.error.mensaje, e.error.error,'error');
+        return throwError(e);
+      })
+    );
+  }
 }
