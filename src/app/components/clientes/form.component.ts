@@ -41,6 +41,7 @@ export class FormComponent implements OnInit {
     this.cs.create(this.client).subscribe(
       json=>{
         this.router.navigate(["/clientes"])
+        console.log(this.client)
         Swal.fire('Nuevo Cliente',`Cliente ${json.cliente.nombre} Creado con Exito`,'success')
       },
       err=>{
@@ -55,6 +56,7 @@ export class FormComponent implements OnInit {
     this.cs.updateCliente(this.client).subscribe(
       json=>{
         this.router.navigate(['/clientes'])
+        console.log(this.client);
         Swal.fire('Cliente Actualizado',`Cliente ${json.cliente.nombre} Actualizado con Exito`,'success')
     },
       err=>{

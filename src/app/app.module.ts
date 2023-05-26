@@ -7,6 +7,10 @@ import { FormsModule } from '@angular/forms';
 import {registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es-MX'
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 import { AppComponent } from './app.component';
@@ -17,6 +21,7 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { FormComponent } from './components/clientes/form.component';
 import { ClienteService } from './services/cliente.service';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -47,6 +52,11 @@ const routes:Routes=[
     RouterModule.forRoot(routes),
     CommonModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
   ],
   providers: [ClienteService],
   bootstrap: [AppComponent]
