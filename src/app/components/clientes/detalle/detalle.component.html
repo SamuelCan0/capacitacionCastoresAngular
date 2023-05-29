@@ -20,6 +20,10 @@
                 </button>
               </div>
             </div>
+            <div *ngIf="progreso>0" class="progress" role="progressbar" aria-label="Basic example" attr.aria-valuenow="{{progreso}}" aria-valuemin="0"
+              aria-valuemax="100">
+              <div class="progress-bar" [ngStyle]="{width: progreso+'%'}">{{progreso}}%</div>
+            </div>
           </ul>
         </div>
         <div class="col-sm">

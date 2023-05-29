@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -15,6 +16,7 @@ export class DetalleComponent implements OnInit {
   id:number = 0;
 
   fotoSeleccionada!:File;
+  progreso:number=0;
 
   constructor(private cs:ClienteService,private ar:ActivatedRoute) { }
 
@@ -44,9 +46,14 @@ export class DetalleComponent implements OnInit {
       Swal.fire('Error: debes seleccionar una foto','','error');
     } else {
       this.cs.subirFoto(this.fotoSeleccionada,this.cliente.id)
-      .subscribe(cliente=>{
-        this.cliente=cliente;
+      .subscribe(event=>{
+        if (event.type===HttpEventType.UploadProgress) {
+          this.progreso=Math.round((event.loaded/event.total!)*100);
+        }else if (event.type===HttpEventType.Response){
+          let response:any=event.body;
+          this.cliente=response.Cliente as Cliente;
         Swal.fire("La Foto Se a Subido Con Exito!",`se subio la foto: ${this.cliente.foto}`,"success");
+        }
       })
     }
   }
