@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ModalService } from 'src/app/services/modal.service';
 import Swal from 'sweetalert2';
-import { Cliente } from './cliente';
 
 
 @Component({

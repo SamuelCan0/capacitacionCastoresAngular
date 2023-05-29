@@ -1,9 +1,9 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ModalService } from 'src/app/services/modal.service';
 import Swal from 'sweetalert2';
-import { Cliente } from '../cliente';
 
 @Component({
   selector: 'app-detalle',
