@@ -43,7 +43,8 @@ export class DetalleComponent implements OnInit {
         }else if (event.type===HttpEventType.Response){
           let response:any=event.body;
           this.cliente=response.Cliente as Cliente;
-        Swal.fire("La Foto Se a Subido Con Exito!",`se subio la foto: ${this.cliente.foto}`,"success");
+          this.ms.notificarUpload.emit(this.cliente);
+          Swal.fire("La Foto Se a Subido Con Exito!",`se subio la foto: ${this.cliente.foto}`,"success");
         }
       })
     }

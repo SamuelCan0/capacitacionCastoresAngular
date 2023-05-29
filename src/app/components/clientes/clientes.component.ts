@@ -35,6 +35,14 @@ export class ClientesComponent implements OnInit {
         this.clientes = response.content as Cliente[];
         this.paginador=response;
       });
+   });
+   this.ms.notificarUpload.subscribe(cliente=>{
+     this.clientes=this.clientes.map(clienteOriginal=>{
+      if (cliente.id==clienteOriginal.id) {
+        clienteOriginal.foto=cliente.foto;
+      }
+      return clienteOriginal;
+     })
    })
   }
 
